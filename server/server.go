@@ -1,12 +1,21 @@
 package server
 
 import (
+	"math/rand"
 	"net/http"
 
 	"github.com/go-echarts/go-echarts/v2/charts"
 	"github.com/go-echarts/go-echarts/v2/opts"
 	"github.com/go-echarts/go-echarts/v2/types"
 )
+
+func generateLineItems() []opts.LineData {
+	items := make([]opts.LineData, 0)
+	for i := 0; i < 7; i++ {
+		items = append(items, opts.LineData{Value: rand.Intn(300)})
+	}
+	return items
+}
 
 func httpserver(w http.ResponseWriter, _ *http.Request) {
 	// create a new line instance
@@ -25,4 +34,9 @@ func httpserver(w http.ResponseWriter, _ *http.Request) {
 		AddSeries("Category B", generateLineItems()).
 		SetSeriesOptions(charts.WithLineChartOpts(opts.LineChart{Smooth: true}))
 	line.Render(w)
+}
+
+func ShowGraph() {
+	http.HandleFunc("/", httpserver)
+	http.ListenAndServe(":8081", nil)
 }
