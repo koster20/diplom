@@ -7,5 +7,6 @@ import (
 // generate random data for line chart
 
 func main() {
+
 	server.ShowGraph()
 }
