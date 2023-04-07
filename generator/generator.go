@@ -5,11 +5,6 @@ import (
 	"math"
 )
 
-type pointFromMethods struct {
-	simpsonPoint   float64
-	trapezoidPoint float64
-}
-
 const eps = 0.01
 
 func Base_function(x float64) float64 {
